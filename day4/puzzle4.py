@@ -1,6 +1,6 @@
 import numpy as np
-PROP1 = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"].sort()
-PROP2 = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"].sort()
+PROP1 = sorted(["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"])
+PROP2 = sorted(["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"])
 
 def read_input():
     counter = 0
@@ -23,9 +23,12 @@ def process_passport(raw_passport):
         properties.append(prop.split(":")[0])
     if len(properties) < 7:
         return 0
-    if len(properties) == 7 and properties.sort() == PROP2:
-        return 1
-    if len(properties) == 8 and properties.sort() == PROP1:
+    if len(properties) == 7:
+        if "cid" not in properties:
+            return 1
+        else:
+            return 0
+    if len(properties) == 8:
         return 1
 
 
